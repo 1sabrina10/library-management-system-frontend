@@ -1,0 +1,264 @@
+
+<div class="loan-detail-page">
+
+  <div class="loan-detail-card">
+
+    <div class="detail-header">
+
+      <div class="detail-icon">
+
+        <span class="material-symbols-outlined">
+          menu_book
+        </span>
+
+      </div>
+
+      <span class="detail-eyebrow">
+        BIBLIOTHÈQUE
+      </span>
+
+      <h1>
+        Détail de l'emprunt
+      </h1>
+
+      <p>
+        Consultez les informations de cet emprunt.
+      </p>
+
+    </div>
+
+    @if (loan) {
+
+      <div class="book-section">
+
+        <div class="book-icon">
+
+          <span class="material-symbols-outlined">
+            auto_stories
+          </span>
+
+        </div>
+
+        <div>
+
+          <span class="info-label">
+            Livre
+          </span>
+
+          <h2>
+            {{ loan.bookTitle }}
+          </h2>
+
+        </div>
+
+      </div>
+
+      <div class="details-list">
+
+        <div class="detail-item">
+
+          <span class="material-symbols-outlined">
+            person
+          </span>
+
+          <div>
+
+            <span class="info-label">
+              Emprunteur
+            </span>
+
+            <strong>
+              {{ loan.userName }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span class="material-symbols-outlined">
+            calendar_month
+          </span>
+
+          <div>
+
+            <span class="info-label">
+              Date d'emprunt
+            </span>
+
+            <strong>
+              {{ loan.BorrowDate }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span class="material-symbols-outlined">
+            event_available
+          </span>
+
+          <div>
+
+            <span class="info-label">
+              Date de retour
+            </span>
+
+            <strong>
+              {{ loan.returnDate || 'Non retourné' }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="status-section">
+
+        <span class="status-label">
+          Statut de l'emprunt
+        </span>
+
+        <span
+          class="status-badge"
+          [class.returned]="loan.loanStatus === 'RETURNED'"
+          [class.borrowed]="loan.loanStatus === 'BORROWED'"
+          [class.late]="loan.loanStatus === 'LATE'"
+        >
+
+          <span class="material-symbols-outlined">
+
+            {{
+              loan.loanStatus === 'RETURNED'
+                ? 'check_circle'
+                : loan.loanStatus === 'LATE'
+                  ? 'warning'
+                  : 'schedule'
+            }}
+
+          </span>
+
+          {{ loan.loanStatus }}
+
+        </span>
+
+      </div>
+
+      @if (loan.loanStatus === 'BORROWED') {
+
+        @if (isAdmin()) {
+
+          <div class="return-message">
+
+            <span class="material-symbols-outlined">
+              info
+            </span>
+
+            <span>
+              Ce livre est actuellement emprunté.
+            </span>
+
+          </div>
+
+        }
+
+      } @else {
+
+        <div class="returned-message">
+
+          <span class="material-symbols-outlined">
+            check_circle
+          </span>
+
+          <span>
+            Ce livre a déjà été retourné.
+          </span>
+
+        </div>
+
+      }
+
+      <div class="detail-actions">
+
+        @if (isAdmin() && loan.loanStatus === 'BORROWED') {
+
+          <button
+            type="button"
+            class="return-button"
+            (click)="retournerLivre()"
+            [disabled]="loading"
+          >
+
+            <span class="material-symbols-outlined">
+              assignment_return
+            </span>
+
+            {{
+              loading
+                ? 'Retour en cours...'
+                : 'Marquer comme retourné'
+            }}
+
+          </button>
+
+        }
+
+        <button
+          type="button"
+          class="back-button"
+          (click)="router.navigate(['/loans'])"
+        >
+
+          <span class="material-symbols-outlined">
+            arrow_back
+          </span>
+
+          Retour à la liste
+
+        </button>
+
+      </div>
+
+
+    } @else if (!errorMessage) {
+
+      <div class="loading-state">
+
+        <span class="material-symbols-outlined">
+          progress_activity
+        </span>
+
+        <p>
+          Chargement de l'emprunt...
+        </p>
+
+      </div>
+
+    }
+
+    @if (errorMessage) {
+
+      <div class="error-state">
+
+        <span class="material-symbols-outlined">
+          error
+        </span>
+
+        <p>
+          {{ errorMessage }}
+        </p>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>
+

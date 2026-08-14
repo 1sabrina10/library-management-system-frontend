@@ -1,0 +1,105 @@
+<div class="login-page">
+
+  <div class="login-card">
+
+
+<div class="login-header">
+
+  <div class="login-icon">
+    <span class="material-symbols-outlined">
+      login
+    </span>
+  </div>
+
+  <span class="login-eyebrow">
+    BIBLIOTHÈQUE
+  </span>
+
+  <h1>Connexion</h1>
+
+  <p>
+    Connectez-vous à votre compte LibraryMS.
+  </p>
+
+</div>
+
+
+<form (ngSubmit)="seConnecter()">
+
+  <div class="form-group">
+
+    <label for="email">
+      Adresse email
+    </label>
+
+    <div class="input-wrapper">
+
+      <span
+        class="material-symbols-outlined"
+        [class.icon-error]="loginError"
+      >
+        mail
+      </span>
+
+      <input
+  id="email"
+  type="email"
+  [(ngModel)]="email"
+  name="email"
+  placeholder="exemple@email.com"
+  required
+  [class.input-error]="loginError"
+  >
+
+    </div>
+
+  </div>
+
+  <div class="form-group">
+
+    <label for="motDePasse">
+      Mot de passe
+    </label>
+
+    <div class="input-wrapper">
+
+      <span
+        class="material-symbols-outlined"
+        [class.icon-error]="loginError"
+      >
+        lock
+      </span>
+
+     <input
+  id="motDePasse"
+  type="password"
+  [(ngModel)]="motDePasse"
+  name="motDePasse"
+  placeholder="Votre mot de passe"
+  required
+  [class.input-error]="loginError"
+>
+
+    </div>
+
+  </div>
+
+  <button
+    type="submit"
+    class="login-button"
+  >
+
+    <span class="material-symbols-outlined">
+      login
+    </span>
+
+    Se connecter
+
+  </button>
+
+</form>
+
+
+  </div>
+
+</div>

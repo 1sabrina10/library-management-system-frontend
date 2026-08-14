@@ -1,0 +1,209 @@
+<div class="book-form-page">
+
+  <div class="book-form-card">
+
+
+<div class="form-header">
+
+  <div class="form-icon">
+    <span class="material-symbols-outlined">
+      menu_book
+    </span>
+  </div>
+
+  <span class="form-eyebrow">BIBLIOTHÈQUE</span>
+
+  <h1>Ajouter un livre</h1>
+
+  <p>
+    Ajoutez un nouveau livre à votre bibliothèque.
+  </p>
+
+</div>
+
+<form (ngSubmit)="ajouterLivre()">
+
+  <div class="form-group">
+
+    <label for="title">
+      Titre
+    </label>
+
+    <div class="input-wrapper">
+
+      <span class="material-symbols-outlined">
+        title
+      </span>
+
+      <input
+        id="title"
+        type="text"
+        [(ngModel)]="title"
+        name="title"
+        placeholder="Titre du livre"
+        required
+      >
+
+    </div>
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label for="isbn">
+      ISBN
+    </label>
+
+    <div class="input-wrapper">
+
+      <span class="material-symbols-outlined">
+        qr_code
+      </span>
+
+      <input
+        id="isbn"
+        type="text"
+        [(ngModel)]="isbn"
+        name="isbn"
+        placeholder="Ex. 978-3-16-148410-0"
+        required
+      >
+
+    </div>
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label for="publicationYear">
+      Année de publication
+    </label>
+
+    <div class="input-wrapper">
+
+      <span class="material-symbols-outlined">
+        calendar_month
+      </span>
+
+      <input
+        id="publicationYear"
+        type="number"
+        [(ngModel)]="publicationYear"
+        name="publicationYear"
+        placeholder="Ex. 2024"
+        required
+      >
+
+    </div>
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label for="authorId">
+      Auteur
+    </label>
+
+    <div class="input-wrapper">
+
+      <span class="material-symbols-outlined">
+        person
+      </span>
+
+      <select
+        id="authorId"
+        [(ngModel)]="authorId"
+        name="authorId"
+        required
+      >
+
+        <option [ngValue]="null" disabled>
+          Sélectionner un auteur
+        </option>
+
+        @for (author of authors; track author.id) {
+
+          <option [ngValue]="author.id">
+            {{ author.firstname }} {{ author.lastname }}
+          </option>
+
+        }
+
+      </select>
+
+    </div>
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label for="categoryId">
+      Catégorie
+    </label>
+
+    <div class="input-wrapper">
+
+      <span class="material-symbols-outlined">
+        category
+      </span>
+
+      <select
+        id="categoryId"
+        [(ngModel)]="categoryId"
+        name="categoryId"
+        required
+      >
+
+        <option [ngValue]="null" disabled>
+          Sélectionner une catégorie
+        </option>
+
+        @for (category of categories; track category.id) {
+
+          <option [ngValue]="category.id">
+            {{ category.name }}
+          </option>
+
+        }
+
+      </select>
+
+    </div>
+
+  </div>
+
+
+  <div class="form-actions">
+
+    <button
+      type="button"
+      class="cancel-button"
+      routerLink="/books"
+    >
+      Annuler
+    </button>
+
+    <button
+      type="submit"
+      class="submit-button"
+    >
+
+      <span class="material-symbols-outlined">
+        add
+      </span>
+
+      Ajouter le livre
+
+    </button>
+
+  </div>
+
+</form>
+
+  </div>
+
+</div>

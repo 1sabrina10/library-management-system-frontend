@@ -1,0 +1,85 @@
+<div class="category-form-page">
+
+  <div class="category-form-card">
+
+<div class="form-header">
+
+  <div class="form-icon">
+
+    <span class="material-symbols-outlined">
+      edit
+    </span>
+
+  </div>
+
+  <span class="form-eyebrow">
+    BIBLIOTHÈQUE
+  </span>
+
+  <h1>
+    Modifier la catégorie
+  </h1>
+
+  <p>
+    Modifiez les informations de cette catégorie.
+  </p>
+
+</div>
+
+<form (ngSubmit)="modifierCategorie()">
+
+  <div class="form-group">
+
+    <label for="name">
+      Nom de la catégorie
+    </label>
+
+    <div class="input-wrapper">
+
+      <span class="material-symbols-outlined">
+        category
+      </span>
+
+      <input
+        id="name"
+        type="text"
+        [(ngModel)]="name"
+        name="name"
+        placeholder="Nom de la catégorie"
+        required
+      >
+
+    </div>
+
+  </div>
+
+  <div class="form-actions">
+
+    <button
+      type="button"
+      class="cancel-button"
+      routerLink="/categories"
+    >
+      Annuler
+    </button>
+
+    <button
+      type="submit"
+      class="submit-button"
+    >
+
+      <span class="material-symbols-outlined">
+        save
+      </span>
+
+      Enregistrer
+
+    </button>
+
+  </div>
+
+</form>
+
+  </div>
+
+</div>

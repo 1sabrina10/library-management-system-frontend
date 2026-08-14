@@ -1,0 +1,201 @@
+<div class="authors-page">
+
+  <div class="page-header">
+
+<div class="page-title">
+
+  <span class="page-eyebrow">
+    BIBLIOTHÈQUE
+  </span>
+
+  <h1>
+    Nos auteurs
+  </h1>
+
+  <p>
+    Découvrez les auteurs présents dans votre bibliothèque.
+  </p>
+
+</div>
+
+
+<div class="header-right">
+
+  @if (isAdmin()) {
+
+    <button
+      type="button"
+      class="add-button"
+      routerLink="/authors/create"
+    >
+
+      <span class="material-symbols-outlined">
+        person_add
+      </span>
+
+      Ajouter un auteur
+
+    </button>
+
+  }
+
+
+  <div class="authors-count">
+
+    <span class="material-symbols-outlined">
+      groups
+    </span>
+
+    <div>
+
+      <strong>
+        {{ authors.length }}
+      </strong>
+
+      <span>
+        Auteurs
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+  </div>
+
+
+@if (authors.length === 0) {
+
+
+<div class="empty-state">
+
+  <div class="empty-icon">
+
+    <span class="material-symbols-outlined">
+      person_off
+    </span>
+
+  </div>
+
+  <h2>
+    Aucun auteur
+  </h2>
+
+  <p>
+    Aucun auteur n'est disponible pour le moment.
+  </p>
+
+  @if (isAdmin()) {
+
+    <button
+      class="empty-add-button"
+      routerLink="/authors/create"
+    >
+
+      <span class="material-symbols-outlined">
+        person_add
+      </span>
+
+      Ajouter le premier auteur
+
+    </button>
+
+  }
+
+</div>
+
+}
+
+
+@else {
+
+<div class="authors-grid">
+
+  @for (author of authors; track author.id) {
+
+    <article class="author-card">
+
+      <div class="author-avatar">
+
+        <span class="material-symbols-outlined">
+          person
+        </span>
+
+      </div>
+
+      <div class="author-info">
+
+        <h2>
+          {{ author.firstname }}
+          {{ author.lastname }}
+        </h2>
+
+        <span class="author-label">
+          Auteur
+        </span>
+
+        @if (author.biography) {
+
+          <p>
+            {{ author.biography }}
+          </p>
+
+        } @else {
+
+          <p class="no-biography">
+            Aucune biographie disponible.
+          </p>
+
+        }
+
+      </div>
+
+      @if (isAdmin()) {
+
+        <div class="author-actions">
+
+          <button
+            type="button"
+            class="edit-button"
+            [routerLink]="['/authors/edit', author.id]"
+          >
+
+            <span class="material-symbols-outlined">
+              edit
+            </span>
+
+            Modifier
+
+          </button>
+
+
+          <button
+            type="button"
+            class="delete-button"
+            (click)="supprimerAuteur(author.id)"
+          >
+
+            <span class="material-symbols-outlined">
+              delete
+            </span>
+
+            Supprimer
+
+          </button>
+
+        </div>
+
+      }
+
+    </article>
+
+  }
+
+</div>
+
+
+}
+
+</div>

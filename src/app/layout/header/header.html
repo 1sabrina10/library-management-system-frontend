@@ -1,0 +1,56 @@
+<header class="site-header">
+
+  <div class="header-container">
+
+    <a routerLink="/" class="logo">
+
+      <span class="material-symbols-outlined logo-icon">
+        menu_book
+      </span>
+
+      <span class="logo-text">
+        LibraryMS
+      </span>
+
+    </a>
+
+    <nav class="main-nav">
+
+      <a routerLink="/" routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: true }">
+        Accueil
+      </a>
+
+      <a routerLink="/books" routerLinkActive="active">
+        Livres
+      </a>
+
+      <a routerLink="/authors" routerLinkActive="active">
+        Auteurs
+      </a>
+
+      <a routerLink="/categories" routerLinkActive="active">
+        Catégories
+      </a>
+
+      <a routerLink="/loans" routerLinkActive="active">
+        Emprunts
+      </a>
+
+    </nav>
+
+    <div class="header-actions">
+
+      <a routerLink="/login" class="btn-login">
+        Se connecter
+      </a>
+
+      <a routerLink="/register" class="btn-register">
+        Créer un compte
+      </a>
+
+    </div>
+
+  </div>
+
+</header>

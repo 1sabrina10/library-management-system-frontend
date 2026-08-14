@@ -1,0 +1,147 @@
+<div class="books-page">
+
+  <div class="page-header">
+
+
+<div>
+  <span class="page-eyebrow">CATALOGUE</span>
+
+  <h1>Nos livres</h1>
+
+  <p>
+    Découvrez et gérez les livres disponibles dans votre bibliothèque.
+  </p>
+</div>
+
+@if (isAdmin) {
+  <a routerLink="/books/create" class="btn-primary">
+    <span class="material-symbols-outlined">add</span>
+    Ajouter un livre
+  </a>
+}
+
+
+  </div>
+
+@if (books.length > 0) {
+
+
+<div class="books-grid">
+
+  @for (book of books; track book.id) {
+
+    <article class="book-card">
+
+      <div class="book-card-top">
+
+        <div class="book-icon">
+          <span class="material-symbols-outlined">
+            menu_book
+          </span>
+        </div>
+
+        @if (book.available) {
+          <span class="status available">
+            Disponible
+          </span>
+        } @else {
+          <span class="status unavailable">
+            Emprunté
+          </span>
+        }
+
+      </div>
+
+
+      <div class="book-info">
+
+        <h2>{{ book.title }}</h2>
+
+        <p class="isbn">
+          ISBN : {{ book.isbn }}
+        </p>
+
+        <p class="year">
+          {{ book.publicationYear }}
+        </p>
+
+      </div>
+
+
+      <div class="book-actions">
+
+        <a
+          [routerLink]="['/books', book.id]"
+          class="btn-view"
+        >
+          Voir le livre
+
+          <span class="material-symbols-outlined">
+            arrow_forward
+          </span>
+        </a>
+
+
+        @if (isAdmin) {
+
+          <div class="admin-actions">
+
+            <button
+              [routerLink]="['/books/edit', book.id]"
+              class="btn-edit"
+              title="Modifier"
+            >
+              <span class="material-symbols-outlined">
+                edit
+              </span>
+            </button>
+
+            <button
+              (click)="supprimerLivre(book.id)"
+              class="btn-delete"
+              title="Supprimer"
+            >
+              <span class="material-symbols-outlined">
+                delete
+              </span>
+            </button>
+
+          </div>
+
+        }
+
+      </div>
+
+    </article>
+
+  }
+
+</div>
+
+} @else {
+
+<div class="empty-state">
+
+  <div class="empty-icon">
+    <span class="material-symbols-outlined">
+      menu_book
+    </span>
+  </div>
+
+  <h2>Aucun livre</h2>
+
+  <p>
+    Aucun livre n'est actuellement disponible dans la bibliothèque.
+  </p>
+
+  @if (isAdmin) {
+    <a routerLink="/books/create" class="btn-primary">
+      <span class="material-symbols-outlined">add</span>
+      Ajouter un livre
+    </a>
+  }
+
+</div>
+
+}
+</div>

@@ -1,0 +1,118 @@
+
+<div class="create-page">
+
+  <div class="form-header">
+
+    <div class="form-icon">
+      <span class="material-symbols-outlined">
+        swap_horiz
+      </span>
+    </div>
+
+    <span class="form-eyebrow">
+      BIBLIOTHÈQUE
+    </span>
+
+    <h1>
+      Créer un emprunt
+    </h1>
+
+    <p>
+      Sélectionnez un livre pour créer un nouvel emprunt.
+    </p>
+
+  </div>
+
+
+  <form (ngSubmit)="ajouterEmprunt()">
+
+    <div class="form-group">
+
+      <label for="bookId">
+        Livre
+      </label>
+
+      <div class="select-wrapper">
+
+        <span class="material-symbols-outlined">
+          menu_book
+        </span>
+
+        <select
+          id="bookId"
+          name="bookId"
+          [(ngModel)]="bookId"
+          required
+        >
+
+          <option [ngValue]="0" disabled>
+            -- Choisir un livre --
+          </option>
+
+          @for (book of books; track book.id) {
+
+            <option [ngValue]="book.id">
+              {{ book.title }}
+            </option>
+
+          }
+
+        </select>
+
+      </div>
+
+    </div>
+
+    @if (errorMessage) {
+
+      <div class="error-message">
+
+        <span class="material-symbols-outlined">
+          error
+        </span>
+
+        <span>
+          {{ errorMessage }}
+        </span>
+
+      </div>
+
+    }
+
+    <div class="form-actions">
+
+      <button
+        type="button"
+        class="cancel-button"
+        routerLink="/loans"
+      >
+
+        <span class="material-symbols-outlined">
+          arrow_back
+        </span>
+
+        Annuler
+
+      </button>
+
+
+      <button
+        type="submit"
+        class="submit-button"
+        [disabled]="bookId === 0 || loading"
+      >
+
+        <span class="material-symbols-outlined">
+          {{ loading ? 'progress_activity' : 'add' }}
+        </span>
+
+        {{ loading ? 'Création...' : 'Créer l’emprunt' }}
+
+      </button>
+
+    </div>
+
+  </form>
+
+</div>
+

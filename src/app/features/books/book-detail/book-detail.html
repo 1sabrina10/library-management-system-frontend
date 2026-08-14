@@ -1,0 +1,224 @@
+```html
+<div class="book-detail-page">
+
+  @if (book) {
+
+    <button
+      class="back-button"
+      (click)="retour()"
+    >
+
+      <span class="material-symbols-outlined">
+        arrow_back
+      </span>
+
+      Retour aux livres
+
+    </button>
+
+
+    <div class="book-detail-card">
+
+      <div class="book-cover">
+
+        <span class="material-symbols-outlined">
+          menu_book
+        </span>
+
+      </div>
+
+      <div class="book-content">
+
+        @if (book.available) {
+
+          <span class="status available">
+            Disponible
+          </span>
+
+        } @else {
+
+          <span class="status unavailable">
+            Emprunté
+          </span>
+
+        }
+
+        <h1>
+          {{ book.title }}
+        </h1>
+
+        <p class="author">
+          {{ book.authorName }}
+        </p>
+
+        <div class="book-details">
+
+          <div class="detail-item">
+
+            <span class="material-symbols-outlined">
+              category
+            </span>
+
+            <div>
+
+              <span>
+                Catégorie
+              </span>
+
+              <strong>
+                {{ book.categoryName }}
+              </strong>
+
+            </div>
+
+          </div>
+
+          <div class="detail-item">
+
+            <span class="material-symbols-outlined">
+              calendar_month
+            </span>
+
+            <div>
+
+              <span>
+                Année de publication
+              </span>
+
+              <strong>
+                {{ book.publicationYear }}
+              </strong>
+
+            </div>
+
+          </div>
+
+          <div class="detail-item">
+
+            <span class="material-symbols-outlined">
+              qr_code
+            </span>
+
+            <div>
+
+              <span>
+                ISBN
+              </span>
+
+              <strong>
+                {{ book.isbn }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+        <div class="detail-actions">
+
+          @if (book.available) {
+
+            <a
+              routerLink="/loans/create"
+              class="btn-primary"
+            >
+
+              <span class="material-symbols-outlined">
+                library_add
+              </span>
+
+              Emprunter ce livre
+
+            </a>
+
+          } @else {
+
+            <button
+              class="btn-disabled"
+              disabled
+            >
+
+              <span class="material-symbols-outlined">
+                block
+              </span>
+
+              Livre actuellement emprunté
+
+            </button>
+
+          }
+
+          @if (isAdmin()) {
+
+            <button
+              type="button"
+              class="btn-secondary"
+              (click)="modifier()"
+            >
+
+              <span class="material-symbols-outlined">
+                edit
+              </span>
+
+              Modifier
+
+            </button>
+
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  } @else if (loading) {
+
+    <div class="loading-state">
+
+      <span class="material-symbols-outlined">
+        progress_activity
+      </span>
+
+      <p>
+        Chargement du livre...
+      </p>
+
+    </div>
+
+
+  } @else {
+
+    <div class="error-state">
+
+      <span class="material-symbols-outlined">
+        error
+      </span>
+
+      <h2>
+        Livre introuvable
+      </h2>
+
+      <p>
+        {{ errorMessage }}
+      </p>
+
+      <button
+        type="button"
+        class="btn-secondary"
+        (click)="retour()"
+      >
+
+        Retour aux livres
+
+      </button>
+
+    </div>
+
+  }
+
+</div>
+

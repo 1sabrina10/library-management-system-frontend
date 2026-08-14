@@ -1,0 +1,179 @@
+<div class="categories-page">
+
+  <div class="page-header">
+
+<div class="page-title">
+
+  <span class="page-eyebrow">
+    BIBLIOTHÈQUE
+  </span>
+
+  <h1>
+    Nos catégories
+  </h1>
+
+  <p>
+    Organisez vos livres par catégorie.
+  </p>
+
+</div>
+
+<div class="header-right">
+
+  @if (isAdmin()) {
+
+    <button
+      type="button"
+      class="add-button"
+      routerLink="/categories/create"
+    >
+
+      <span class="material-symbols-outlined">
+        add
+      </span>
+
+      Ajouter une catégorie
+
+    </button>
+
+  }
+
+  <div class="categories-count">
+
+    <span class="material-symbols-outlined">
+      category
+    </span>
+
+    <div>
+
+      <strong>
+        {{ categories.length }}
+      </strong>
+
+      <span>
+        Catégories
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+  </div>
+
+@if (categories.length === 0) {
+
+<div class="empty-state">
+
+  <div class="empty-icon">
+
+    <span class="material-symbols-outlined">
+      category
+    </span>
+
+  </div>
+
+  <h2>
+    Aucune catégorie
+  </h2>
+
+  <p>
+    Aucune catégorie n'est disponible pour le moment.
+  </p>
+
+  @if (isAdmin()) {
+
+    <button
+      class="empty-add-button"
+      routerLink="/categories/create"
+    >
+
+      <span class="material-symbols-outlined">
+        add
+      </span>
+
+      Ajouter la première catégorie
+
+    </button>
+
+  }
+
+</div>
+
+}
+
+@else {
+
+<div class="categories-grid">
+
+  @for (category of categories; track category.id) {
+
+    <article class="category-card">
+
+      <div class="category-icon">
+
+        <span class="material-symbols-outlined">
+          category
+        </span>
+
+      </div>
+
+
+      <div class="category-info">
+
+        <h2>
+          {{ category.name }}
+        </h2>
+
+        <span class="category-label">
+          Catégorie
+        </span>
+
+      </div>
+
+      @if (isAdmin()) {
+
+        <div class="category-actions">
+
+          <button
+            type="button"
+            class="edit-button"
+            [routerLink]="['/categories/edit', category.id]"
+          >
+
+            <span class="material-symbols-outlined">
+              edit
+            </span>
+
+            Modifier
+
+          </button>
+
+          <button
+            type="button"
+            class="delete-button"
+            (click)="supprimerCategorie(category.id)"
+          >
+
+            <span class="material-symbols-outlined">
+              delete
+            </span>
+
+            Supprimer
+
+          </button>
+
+        </div>
+
+      }
+
+    </article>
+
+  }
+
+</div>
+
+}
+
+</div>

@@ -1,0 +1,261 @@
+
+<div class="loans-page">
+
+  <div class="page-header">
+
+    <div class="page-title">
+
+      <span class="page-eyebrow">
+        BIBLIOTHÈQUE
+      </span>
+
+      <h1>
+        Liste des emprunts
+      </h1>
+
+      <p>
+        Consultez et gérez les emprunts de votre bibliothèque.
+      </p>
+
+    </div>
+
+    <div class="header-right">
+
+      <a
+        routerLink="/loans/create"
+        class="add-button"
+      >
+
+        <span class="material-symbols-outlined">
+          add
+        </span>
+
+        Ajouter un emprunt
+
+      </a>
+
+      <div class="loans-count">
+
+        <span class="material-symbols-outlined">
+          book
+        </span>
+
+        <div>
+
+          <strong>
+            {{ loans.length }}
+          </strong>
+
+          <span>
+            Emprunts
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  @if (loans.length === 0) {
+
+    <div class="empty-state">
+
+      <div class="empty-icon">
+
+        <span class="material-symbols-outlined">
+          library_books
+        </span>
+
+      </div>
+
+      <h2>
+        Aucun emprunt
+      </h2>
+
+      <p>
+        Aucun emprunt n'est disponible pour le moment.
+      </p>
+
+    </div>
+
+  }
+
+  @else {
+
+    <div class="loans-grid">
+
+      @for (loan of loans; track loan.id) {
+
+        <article class="loan-card">
+
+          <!-- TOP -->
+
+          <div class="loan-top">
+
+            <div class="book-icon">
+
+              <span class="material-symbols-outlined">
+                menu_book
+              </span>
+
+            </div>
+
+            <div class="loan-title">
+
+              <h2>
+                {{ loan.bookTitle }}
+              </h2>
+
+              <span>
+                Emprunt #{{ loan.id }}
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="loan-info">
+
+            <div class="info-item">
+
+              <span class="material-symbols-outlined">
+                person
+              </span>
+
+              <div>
+
+                <span class="info-label">
+                  Emprunteur
+                </span>
+
+                <strong>
+                  {{ loan.userName }}
+                </strong>
+
+              </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+              <span class="material-symbols-outlined">
+                calendar_month
+              </span>
+
+              <div>
+
+                <span class="info-label">
+                  Date d'emprunt
+                </span>
+
+                <strong>
+                  {{ loan.BorrowDate }}
+                </strong>
+
+              </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+              <span class="material-symbols-outlined">
+                event_available
+              </span>
+
+              <div>
+
+                <span class="info-label">
+                  Date de retour
+                </span>
+
+                <strong>
+                  {{ loan.returnDate || 'Non retourné' }}
+                </strong>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="loan-status">
+
+            <span class="status-label">
+              Statut
+            </span>
+
+            <span
+              class="status-badge"
+              [class.returned]="loan.loanStatus === 'RETURNED'"
+              [class.borrowed]="loan.loanStatus === 'BORROWED'"
+              [class.late]="loan.loanStatus === 'LATE'"
+            >
+
+              <span class="material-symbols-outlined">
+
+                {{
+                  loan.loanStatus === 'RETURNED'
+                    ? 'check_circle'
+                    : loan.loanStatus === 'LATE'
+                      ? 'warning'
+                      : 'schedule'
+                }}
+
+              </span>
+
+              {{ loan.loanStatus }}
+
+            </span>
+
+          </div>
+
+          <div class="loan-actions">
+
+            <button
+              type="button"
+              class="view-button"
+              [routerLink]="['/loans', loan.id]"
+            >
+
+              <span class="material-symbols-outlined">
+                visibility
+              </span>
+
+              Voir
+
+            </button>
+
+            @if (isAdmin()) {
+
+              <button
+                type="button"
+                class="delete-button"
+                (click)="supprimerEmprunt(loan.id)"
+              >
+
+                <span class="material-symbols-outlined">
+                  delete
+                </span>
+
+                Supprimer
+
+              </button>
+
+            }
+
+          </div>
+
+        </article>
+
+      }
+
+    </div>
+
+  }
+
+</div>
+

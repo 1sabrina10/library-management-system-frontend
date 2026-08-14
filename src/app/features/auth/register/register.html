@@ -1,0 +1,167 @@
+<div class="register-page">
+
+  <div class="register-card">
+
+
+<div class="register-header">
+
+  <div class="register-icon">
+    <span class="material-symbols-outlined">
+      person_add
+    </span>
+  </div>
+
+  <span class="register-eyebrow">BIBLIOTHÈQUE</span>
+
+  <h1>Créer un compte</h1>
+
+  <p>
+    Rejoignez votre espace bibliothèque.
+  </p>
+
+</div>
+
+
+<form (ngSubmit)="inscrire()">
+
+
+  <div class="form-row">
+
+    <div class="form-group">
+
+      <label for="firstname">
+        Prénom
+      </label>
+
+      <div class="input-wrapper">
+
+        <span class="material-symbols-outlined">
+          person
+        </span>
+
+        <input
+          id="firstname"
+          type="text"
+          placeholder="Votre prénom"
+          [(ngModel)]="firstname"
+          name="firstname"
+          required
+        >
+
+      </div>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label for="lastname">
+        Nom
+      </label>
+
+      <div class="input-wrapper">
+
+        <span class="material-symbols-outlined">
+          person
+        </span>
+
+        <input
+          id="lastname"
+          type="text"
+          placeholder="Votre nom"
+          [(ngModel)]="lastname"
+          name="lastname"
+          required
+        >
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label for="email">
+      Adresse email
+    </label>
+
+    <div class="input-wrapper">
+
+      <span class="material-symbols-outlined">
+        mail
+      </span>
+
+      <input
+        id="email"
+        type="email"
+        placeholder="exemple@email.com"
+        [(ngModel)]="email"
+        name="email"
+        required
+      >
+
+    </div>
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label for="password">
+      Mot de passe
+    </label>
+
+    <div class="input-wrapper">
+
+      <span class="material-symbols-outlined">
+        lock
+      </span>
+
+      <input
+        id="password"
+        type="password"
+        placeholder="Votre mot de passe"
+        [(ngModel)]="password"
+        name="password"
+        required
+      >
+
+    </div>
+
+  </div>
+
+
+  <button
+    type="submit"
+    class="register-button"
+  >
+
+    <span class="material-symbols-outlined">
+      person_add
+    </span>
+
+    S'inscrire
+
+  </button>
+
+</form>
+
+
+<div class="login-link">
+
+  <span>
+    Vous avez déjà un compte ?
+  </span>
+
+  <a routerLink="/login">
+    Se connecter
+  </a>
+
+</div>
+
+
+  </div>
+
+</div>
